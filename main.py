@@ -36,9 +36,9 @@ P_up = bernstein_coeff_order10.bernstein_coeff_order10(10, tot_time_copy_up[0], 
 
 P_up_jax = jnp.asarray(P_up)"""
 #pdb.set_trace()
-ex = 100
-to_save = True
-to_load = False
+ex = 1
+to_save = False
+to_load = True
 X_guess_traj = obstacle_function.get_traj_guess_random(num_timesteps,save = to_save,load =to_load , example =ex,objects=1)
 num_sphere  = X_guess_traj.shape[0]
 X_guess_init = X_guess_traj[:,0,:]  

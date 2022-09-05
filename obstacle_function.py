@@ -36,7 +36,11 @@ def get_obs_pose(X_franka_sphere_init ,X_goal, num_obs,radius_obs,radius_franka_
 
 def get_obs_vector(X_franka_sphere ,X_goal, num_obs,radius_obs,radius_franka_sphere, min_speration = 0.1,save = True,load = False , example =np.NAN):
     
-    """if load == False:
+
+    if load == True:
+        obs_vector = np.load(f"examples/obs_vector_{example}.npy")
+        return obs_vector
+    else:
         #for all sphere obs_vector is same 
         obs_pose_vector = get_obs_pose(X_franka_sphere ,X_goal, num_obs,radius_obs,radius_franka_sphere, min_speration)
         temp_a = jnp.array((radius_obs + radius_franka_sphere)).reshape(1,1)
@@ -44,23 +48,21 @@ def get_obs_vector(X_franka_sphere ,X_goal, num_obs,radius_obs,radius_franka_sph
         
         obs_vector = jnp.hstack((obs_pose_vector,temp))
         #pdb.set_trace()"""
-    if True:
-        obs_vector = np.load(f"examples/obs_vector_{200}.npy")
-        #return obs_vector
     if save ==True:
         np.save(f"examples/obs_vector_{example}",obs_vector)
     return obs_vector  #obs_vector = np.array([(x,y,z)_obs , (a_obs,b_obs,c_obs)_init ] )
     
     
 
-def get_traj_guess_random(num_timestep,save = True,load = False , example =np.NAN,objects=1):
-    if load == False:
+def get_traj_guess_random(num_timestep,save = True,load = False , example =np.NAN,objects=1):               
+    if load == True:
+        sphere_traj_list = np.load(f"examples/X_guess_traj_{example}.npy")
+        return sphere_traj_list
+    else:
         sphere_traj_list = np.zeros((0,0))
         for sphere_num in range(objects):
-            sphere_traj_list = np.load(f"examples/X_guess_traj_{200}.npy")
-            #pdb.set_trace()
-            start_cartesian = sphere_traj_list[3,0,:] #get_pose()
-            goal_cartesian = sphere_traj_list[3,-1,:] #get_pose()
+            start_cartesian = get_pose()
+            goal_cartesian = get_pose()
             sphere_traj_temp =  np.linspace(start_cartesian.squeeze(),goal_cartesian.squeeze(),num_timestep)
             if sphere_num == 0:
                 sphere_traj_list = sphere_traj_temp[jnp.newaxis,]
@@ -68,10 +70,6 @@ def get_traj_guess_random(num_timestep,save = True,load = False , example =np.NA
             else:
                 
                 sphere_traj_list = jnp.vstack((sphere_traj_list,sphere_traj_temp[jnp.newaxis,]))
-               
-    else:
-        sphere_traj_list = np.load(f"examples/X_guess_traj_{example}.npy")
-        return sphere_traj_list
     
     if save ==True:
         np.save(f"examples/X_guess_traj_{example}" ,sphere_traj_list )

@@ -105,12 +105,12 @@ def do_3dplot(X_next,X_guess_init,X_goal,obs_vector,plotno,index,min_distance_ob
            X_next_sphere_init[min_dist_Arg_timeStep_sphere_init[1],0],X_next_sphere_init[min_dist_Arg_timeStep_sphere_init[1],1],X_next_sphere_init[min_dist_Arg_timeStep_sphere_init[1],2],
            mutation_scale=20,
            arrowstyle="-|>",
-           linestyle='dashed',fc='green',ec ='red',label=('min-distance b/w obs and traj=', np.min(np.asarray(sphere_obs_distance))))
+           linestyle='dashed',fc='green',ec ='red',label=('min-distance b/w obs and traj=', np.min(np.asarray(sphere_obs_distance_init))))
         ax.arrow3D(obs_vector[min_dist_Arg_timeStep_sphere[0],0],obs_vector[min_dist_Arg_timeStep_sphere[0],1],obs_vector[min_dist_Arg_timeStep_sphere[0],2],
            X_next_sphere[min_dist_Arg_timeStep_sphere[1],0],X_next_sphere[min_dist_Arg_timeStep_sphere[1],1],X_next_sphere[min_dist_Arg_timeStep_sphere[1],2],
            mutation_scale=20,
            arrowstyle="-|>",
-           linestyle='dashed',fc='red',label=('min-distance b/w obs and traj=',np.min(np.asarray(sphere_obs_distance_init))))
+           linestyle='dashed',fc='red',label=('min-distance b/w obs and traj=',np.min(np.asarray(sphere_obs_distance))))
         #ax.arrow(obs_vector[min_dist_Arg_timeStep_sphere_init[0],0], obs_vector[min_dist_Arg_timeStep_sphere_init[0],1], X_next_sphere_init[min_dist_Arg_timeStep_sphere_init[1],0] - obs_vector[min_dist_Arg_timeStep_sphere_init[0],0], X_next_sphere_init[min_dist_Arg_timeStep_sphere_init[1],1] - obs_vector[min_dist_Arg_timeStep_sphere_init[0],1],head_width=3, length_includes_head=True)
         ax.set_xlabel('x-coord')
         ax.set_ylabel('y-coord')
@@ -119,7 +119,7 @@ def do_3dplot(X_next,X_guess_init,X_goal,obs_vector,plotno,index,min_distance_ob
         plt.title(f"3d traj plot with avoiding obstalces={sphere_no}")
         #pdb.set_trace()
         plt.show()
-        plt.savefig(f"plots/example_{plotno}/3d_plot/sphere_{sphere_no}")
+        #plt.savefig(f"plots/example_{plotno}/3d_plot/sphere_{sphere_no}")
         #if sphere_no ==index[0]:
         #plt.show()
         plt.close()
