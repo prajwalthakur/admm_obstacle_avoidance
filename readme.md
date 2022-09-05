@@ -12,4 +12,6 @@ Problem Statement and Psuedo code
 
 ![](.//media/page3.jpg)
 
-![](.//media/page4.jpg)
+
+![](.//media/page4.png)
+3d trajectory plot showing initial straight guess trajectory (green) and final trajectory (red) found by ADMM optimizer .
